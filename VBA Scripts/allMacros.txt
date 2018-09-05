@@ -1,0 +1,19 @@
+Sub AllMacros()
+    
+Dim WS_Count As Integer
+Dim i As Integer
+
+WS_Count = ActiveWorkbook.Worksheets.Count
+
+For i = 1 To WS_Count
+    
+    ActiveWorkbook.Worksheets(i).Select
+    
+    Call GrabTicker
+    Call YearChange
+    Call VolumeCount
+    Call GreatestValues
+Next i
+
+End Sub
+

@@ -1,0 +1,70 @@
+Sub YearChange()
+    Range("J1").Value = "Yearly Change"
+    Range("K1").Value = "Percent Change"
+    Range("J:J").Columns.AutoFit
+    Range("K:K").Columns.AutoFit
+    
+    Dim oDate As Double
+    Dim oPrice As Double
+    Dim clDate As Double
+    Dim clPrice As Double
+    Dim lrow As Double
+    Dim lrow2 As Double
+    Dim i As Double
+    Dim j As Double
+    
+    lrow = Cells(Rows.Count, 1).End(xlUp).Row
+    lrow2 = Cells(Rows.Count, 9).End(xlUp).Row
+    
+'Find Year Opening and Year Closing Price
+For i = 2 To 2166
+    oDate = 0
+    oPrice = 0
+    clDate = 0
+    clPrice = 0
+    For j = 2 To lrow
+        If Cells(j, 1).Value = Cells(i, 9) Then
+            If oDate = 0 Then
+                oDate = Cells(j, 2).Value
+                oPrice = Cells(j, 3).Value
+            ElseIf oDate > Cells(j, 2).Value Then
+                oDate = Cells(j, 2).Value
+                oPrice = Cells(j, 3).Value
+            ElseIf clDate < Cells(j, 2).Value Then
+                clDate = Cells(j, 2).Value
+                clPrice = Cells(j, 6).Value
+            Else
+                oDate = oDate
+                oPrice = oPrice
+                clDate = clDate
+                clPrice = clPrice
+            End If
+        Else
+            oDate = oDate
+            oPrice = oPrice
+            clDate = clDate
+            clPrice = clPrice
+        End If
+    Next j
+    Cells(i, 10).Value = clPrice - oPrice
+    
+
+    If Cells(i, 10).Value = 0 Then
+        Cells(i, 11).Value = 0
+    ElseIf oPrice = 0 Then
+        Cells(i, 11).Value = "N/A"
+    Else
+        Cells(i, 11).Value = Format((clPrice - oPrice) / oPrice, "Percent")
+    End If
+    
+    If Cells(i, 11).Value > 0 Then
+       Cells(i, 11).Interior.ColorIndex = 4
+    ElseIf Cells(i, 11).Value < 0 Then
+        Cells(i, 11).Interior.ColorIndex = 3
+    Else
+    End If
+    
+    
+Next i
+
+End Sub

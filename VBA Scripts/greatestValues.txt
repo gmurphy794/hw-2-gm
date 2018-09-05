@@ -1,0 +1,46 @@
+Sub GreatestValues()
+    Range("P1").Value = "Ticker"
+    Range("Q1").Value = "Value"
+    Range("O2").Value = "Greatest % Increase"
+    Range("O3").Value = "Greatest % Decrease"
+    Range("O4").Value = "Greates Total Volume"
+    Range("O:O").Columns.AutoFit
+    
+    Dim inc As Double
+    Dim dec As Double
+    Dim vol As Double
+    Dim lrow As Double
+    Dim htic As String
+    Dim ltic As String
+    Dim tic As String
+    
+    lrow = Cells(Rows.Count, 9).End(xlUp).Row
+    inc = 0
+    dec = 0
+    vol = 0
+    
+For i = 2 To lrow
+    If Cells(i, 11).Value <> "N/A" And Cells(i, 11).Value > inc Then
+        inc = Cells(i, 11).Value
+        htic = Cells(i, 9).Value
+    ElseIf Cells(i, 11).Value < dec Then
+        dec = Cells(i, 11).Value
+        ltic = Cells(i, 9).Value
+    Else
+    End If
+Next i
+Range("P2").Value = htic
+Range("P3").Value = ltic
+Range("Q2").Value = Format(inc, "Percent")
+Range("Q3").Value = Format(dec, "Percent")
+        
+For i = 2 To lrow
+    If Cells(i, 12).Value > vol Then
+        vol = Cells(i, 12).Value
+        tic = Cells(i, 9).Value
+    Else
+    End If
+Next i
+Range("P4").Value = tic
+Range("Q4").Value = vol
+End Sub

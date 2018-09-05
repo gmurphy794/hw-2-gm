@@ -1,0 +1,5 @@
+Sub GrabTicker()
+    Range("A:A").Copy Range("I:I")
+    Range("I:I").RemoveDuplicates Columns:=1, Header:=xlYes
+    Range("I1") = "Ticker"
+End Sub
