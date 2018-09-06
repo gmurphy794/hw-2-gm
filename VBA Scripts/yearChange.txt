@@ -17,7 +17,7 @@ Sub YearChange()
     lrow2 = Cells(Rows.Count, 9).End(xlUp).Row
     
 'Find Year Opening and Year Closing Price
-For i = 2 To 2166
+For i = 2 To lrow2
     oDate = 0
     oPrice = 0
     clDate = 0
